@@ -1,0 +1,36 @@
+html {
+  width: fit-content;
+}
+body {
+  margin: 0;
+  display: grid;
+  grid-template-columns: min-content 100px;
+  overflow: hidden;
+}
+
+#inspect {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#inspect button {
+  background: #ebebeb url(../icons/32.png) center center no-repeat;
+  width: 64px;
+  height: 64px;
+  border: none;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+#toast {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fedb9b;
+  color: #ab8445;
+  padding: 2px 6px;
+}
+#toast:empty {
+  display: none;
+}

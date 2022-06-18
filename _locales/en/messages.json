@@ -1,0 +1,5 @@
+{
+  "description": {
+    "message": "An easy-to-use eyedropper tool to figure out what the HEX color of the current pixel is. The color will be copied to the clipboard."
+  }
+}
