@@ -48,7 +48,8 @@ chrome.storage.local.get({
     prefs.swatches.forEach(() => pickr.removeSwatch(0));
     swatches.forEach(c => pickr.addSwatch(c));
 
-    chrome.storage.local.set({
+    chrome.runtime.sendMessage({
+      method: 'swatches',
       swatches
     });
   });
@@ -57,7 +58,6 @@ chrome.storage.local.get({
     eyeDropper.open().then(o => {
       pickr.setColor(o.sRGBHex);
     });
-    console.log(pickr);
   };
   document.addEventListener('click', e => {
     if (e.isTrusted && e.target.classList.contains('pcr-type')) {

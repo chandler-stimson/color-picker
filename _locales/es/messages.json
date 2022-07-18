@@ -1,0 +1,5 @@
+{
+  "description": {
+    "message": "Determina el color del píxel en la pantalla con un cuentagotas de lupa. Admite el historial de selección de colores y la copia en el portapapeles"
+  }
+}

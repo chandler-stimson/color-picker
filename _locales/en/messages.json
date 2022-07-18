@@ -1,5 +1,5 @@
 {
   "description": {
-    "message": "An easy-to-use eyedropper tool to figure out what the HEX color of the current pixel is. The color will be copied to the clipboard."
+    "message": "Determine the pixel's color on the screen with a magnifying glass eyedropper. It supports color selection history and clipboard copy"
   }
 }

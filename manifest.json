@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "0.1.1",
+  "version": "0.1.3",
   "name": "Color Picker - Native Eyedropper",
   "description": "__MSG_description__",
   "default_locale": "en",
@@ -17,8 +17,12 @@
      "256": "data/icons/256.png",
      "512": "data/icons/512.png"
   },
+  "homepage_url": "https://add0n.com/color-picker.html",
   "action": {
     "default_popup": "data/picker/index.html"
+  },
+  "background": {
+    "service_worker": "worker.js"
   },
   "commands": {
     "_execute_action": {
