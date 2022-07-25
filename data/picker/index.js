@@ -57,6 +57,7 @@ chrome.storage.local.get({
     const eyeDropper = new EyeDropper();
     eyeDropper.open().then(o => {
       pickr.setColor(o.sRGBHex);
+      navigator.clipboard.writeText(o.sRGBHex.toLowerCase()).then(() => toast('copied'));
     });
   };
   document.addEventListener('click', e => {
