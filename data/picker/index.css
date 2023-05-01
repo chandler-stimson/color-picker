@@ -9,7 +9,11 @@ body {
 }
 
 #inspect {
-  display: inline-flex;
+  display: grid;
+  grid-template-rows: 1fr 40px;
+}
+#inspect > div {
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -22,6 +26,9 @@ body {
   border-radius: 50%;
   pointer-events: none;
 }
+#native:hover button {
+  background-color: #dbdbdb;
+}
 
 #toast {
   position: absolute;
@@ -33,4 +40,22 @@ body {
 }
 #toast:empty {
   display: none;
+}
+
+#samples {
+  letter-spacing: 0.07em;
+  font-size: 0.75em;
+  color: #75797e;
+  background: #f1f3f4;
+  border-radius: 0.15em;
+  padding: 0.45em 0.5em;
+  text-decoration: none;
+}
+
+/* overwrites */
+.pcr-app {
+  box-shadow: none;
+}
+.pcr-app[data-theme='classic'] {
+  padding-right: 0;
 }

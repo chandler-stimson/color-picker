@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "0.1.4",
+  "version": "0.1.5",
   "name": "Color Picker - Native Eyedropper",
   "description": "__MSG_description__",
   "default_locale": "en",
@@ -9,24 +9,22 @@
     "storage"
   ],
   "icons": {
-     "16": "data/icons/16.png",
-     "32": "data/icons/32.png",
-     "48": "data/icons/48.png",
-     "64": "data/icons/64.png",
-     "128": "data/icons/128.png",
-     "256": "data/icons/256.png",
-     "512": "data/icons/512.png"
+     "16": "/data/icons/16.png",
+     "32": "/data/icons/32.png",
+     "48": "/data/icons/48.png",
+     "64": "/data/icons/64.png",
+     "128": "/data/icons/128.png",
+     "256": "/data/icons/256.png",
+     "512": "/data/icons/512.png"
   },
-  "homepage_url": "https://add0n.com/color-picker.html",
+  "homepage_url": "https://webextension.org/listing/color-picker.html",
   "action": {
-    "default_popup": "data/picker/index.html"
+    "default_popup": "/data/picker/index.html"
   },
   "background": {
     "service_worker": "worker.js"
   },
   "commands": {
-    "_execute_action": {
-      "description": "Press the action button"
-    }
+    "_execute_action": {}
   }
 }

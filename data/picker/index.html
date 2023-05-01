@@ -2,13 +2,18 @@
 <html mode="pickr">
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="dist/themes/classic.min.css"/> <!-- 'classic' theme -->
+  <link rel="stylesheet" href="dist/themes/classic.min.css"/>
   <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
   <div id="pickr"></div>
-  <div id="inspect">
-    <button></button>
+  <div id="inspect" title="Click or Press 'E' to active the native eyedropper ">
+    <div id="native">
+      <button></button>
+    </div>
+    <div>
+      <a id="samples" class="pcr-type" target="_blank">Samples</a>
+    </div>
   </div>
   <div id="toast"></div>
 

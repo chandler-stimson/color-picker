@@ -53,7 +53,10 @@ chrome.storage.local.get({
       swatches
     });
   });
-  document.getElementById('inspect').onclick = () => {
+  pickr.on('init', () => {
+    document.querySelector('.pcr-save').title = `Click or Press 'S' to save the current color`;
+  });
+  document.getElementById('native').onclick = () => {
     const eyeDropper = new EyeDropper();
     eyeDropper.open().then(o => {
       pickr.setColor(o.sRGBHex);
@@ -75,3 +78,17 @@ chrome.storage.local.get({
   });
 });
 
+chrome.storage.local.get({
+  'remote-picker': 'https://webbrowsertools.com/color-picker/'
+}, prefs => {
+  document.getElementById('samples').href = prefs['remote-picker'];
+});
+
+document.addEventListener('keydown', e => {
+  if (e.code === 'KeyE') {
+    document.getElementById('native').click();
+  }
+  else if (e.code === 'KeyS') {
+    document.querySelector('.pcr-save').click();
+  }
+});
