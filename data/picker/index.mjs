@@ -1,5 +1,8 @@
 /* global Pickr, EyeDropper */
 
+import {getReadableColor} from './dist/readable-color.js';
+
+
 const toast = msg => {
   clearTimeout(toast.id);
   const e = document.getElementById('toast');
@@ -55,6 +58,7 @@ chrome.storage.local.get({
   });
   pickr.on('init', () => {
     document.querySelector('.pcr-save').title = `Click or Press 'S' to save the current color`;
+    pickr._emit('change', pickr.getColor());
   });
   document.getElementById('native').onclick = () => {
     const eyeDropper = new EyeDropper();
@@ -63,6 +67,17 @@ chrome.storage.local.get({
       navigator.clipboard.writeText(o.sRGBHex.toLowerCase()).then(() => toast('copied'));
     });
   };
+  pickr.on('change', color => {
+    const hex = color.toHEXA().toString().slice(0, 7);
+
+    const algorithm = 'LuminosityContrast'; // W3C, WCAG, Luminosity
+    const readableHex = getReadableColor(hex, algorithm);
+
+    const e = document.getElementById('readable');
+    e.value = readableHex;
+    e.style['background-color'] = hex;
+    e.style['color'] = readableHex;
+  });
   document.addEventListener('click', e => {
     if (e.isTrusted && e.target.classList.contains('pcr-type')) {
       setTimeout(() => chrome.storage.local.set({
@@ -74,6 +89,9 @@ chrome.storage.local.get({
     if (e.isTrusted && e.target.classList.contains('pcr-result')) {
       e.target.select();
       navigator.clipboard.writeText(e.target.value.toLowerCase()).then(() => toast('copied'));
+    }
+    else if (e.isTrusted && e.target.id === 'readable') {
+      navigator.clipboard.writeText(e.target.value).then(() => toast('copied'));
     }
   });
 });

@@ -4,10 +4,9 @@ html {
 body {
   margin: 0;
   display: grid;
-  grid-template-columns: min-content 100px;
+  grid-template-columns: min-content 180px;
   overflow: hidden;
 }
-
 #inspect {
   display: grid;
   grid-template-rows: 1fr 40px;
@@ -19,7 +18,7 @@ body {
   cursor: pointer;
 }
 #inspect button {
-  background: #ebebeb url(../icons/32.png) center center no-repeat;
+  background: #ebebeb url("../icons/32.png") center center no-repeat;
   width: 64px;
   height: 64px;
   border: none;
@@ -27,9 +26,8 @@ body {
   pointer-events: none;
 }
 #native:hover button {
-  background-color: #dbdbdb;
+  background-color: #8fbaff;
 }
-
 #toast {
   position: absolute;
   top: 10px;
@@ -41,7 +39,12 @@ body {
 #toast:empty {
   display: none;
 }
-
+#tools {
+  display: flex;
+  gap: 3px;
+  padding-top: 3px; /* align with other tools */
+}
+#readable,
 #samples {
   letter-spacing: 0.07em;
   font-size: 0.75em;
@@ -50,6 +53,21 @@ body {
   border-radius: 0.15em;
   padding: 0.45em 0.5em;
   text-decoration: none;
+}
+#readable {
+  /* sets the background for the base class */
+  background: rgb(var(--red), var(--green), var(--blue));
+
+  /* calculates perceived lightness using the sRGB Luma method
+  Luma = (red * 0.2126 + green * 0.7152 + blue * 0.0722) / 255 */
+  --r: calc(var(--red) * 0.2126);
+  --g: calc(var(--green) * 0.7152);
+  --b: calc(var(--blue) * 0.0722);
+  --sum: calc(var(--r) + var(--g) + var(--b));
+  --perceived-lightness: calc(var(--sum) / 255);
+
+  /* shows either white or black color depending on perceived darkness */
+  color: hsl(0, 0%, calc((var(--perceived-lightness) - var(--threshold)) * -10000000%));
 }
 
 /* overwrites */

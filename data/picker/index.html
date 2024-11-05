@@ -2,6 +2,7 @@
 <html mode="pickr">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="dist/themes/classic.min.css"/>
   <link rel="stylesheet" type="text/css" href="index.css">
 </head>
@@ -11,13 +12,14 @@
     <div id="native">
       <button></button>
     </div>
-    <div>
+    <div id="tools">
       <a id="samples" class="pcr-type" target="_blank">Samples</a>
+      <a id="readable" class="pcr-type" target="_blank" title="Provides a color that - according to established algorithms - should be easily readable on the given background.">Readable Color</a>
     </div>
   </div>
   <div id="toast"></div>
 
   <script src="dist/pickr.min.js"></script>
-  <script type="text/javascript" src="index.js"></script>
+  <script type="module" src="index.mjs"></script>
 </body>
 </html>
