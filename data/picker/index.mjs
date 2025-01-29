@@ -2,7 +2,6 @@
 
 import {getReadableColor} from './dist/readable-color.js';
 
-
 const toast = msg => {
   clearTimeout(toast.id);
   const e = document.getElementById('toast');
@@ -14,7 +13,8 @@ const toast = msg => {
 
 chrome.storage.local.get({
   swatches: [],
-  representation: 'HEX' // HEX, RGBA, HSVA, HSLA and CMYK
+  representation: 'HEX', // HEX, RGBA, HSVA, HSLA and CMYK
+  precision: 2
 }, prefs => {
   const pickr = Pickr.create({
     el: '#pickr',
@@ -25,6 +25,8 @@ chrome.storage.local.get({
     swatches: prefs.swatches,
     default: prefs.swatches[0] || '#42445a',
     defaultRepresentation: prefs.representation,
+    outputPrecision: prefs.precision,
+    adjustableNumbers: true,
     components: {
       palette: true,
       preview: true,
@@ -44,28 +46,40 @@ chrome.storage.local.get({
       }
     }
   });
+  console.log(pickr);
   pickr.on('save', color => {
-    const c = color.toHEXA().toString();
+    // save in RGBA to follow the requested precision
+    const c = color.toRGBA().toString(prefs.precision);
     const swatches = prefs.swatches = [c, ...prefs.swatches].filter((s, n, l) => s && l.indexOf(s) === n).slice(0, 6);
 
     prefs.swatches.forEach(() => pickr.removeSwatch(0));
     swatches.forEach(c => pickr.addSwatch(c));
 
-    chrome.runtime.sendMessage({
-      method: 'swatches',
+    chrome.storage.local.set({
       swatches
     });
   });
   pickr.on('init', () => {
     document.querySelector('.pcr-save').title = `Click or Press 'S' to save the current color`;
+    document.querySelector('.pcr-save').accesskey = 's';
     pickr._emit('change', pickr.getColor());
   });
-  document.getElementById('native').onclick = () => {
-    const eyeDropper = new EyeDropper();
-    eyeDropper.open().then(o => {
+  document.getElementById('native').onclick = async () => {
+    try {
+      const eyeDropper = new EyeDropper();
+      const o = await eyeDropper.open();
+      const representation = pickr.getColorRepresentation();
       pickr.setColor(o.sRGBHex);
-      navigator.clipboard.writeText(o.sRGBHex.toLowerCase()).then(() => toast('copied'));
-    });
+      pickr.setColorRepresentation(representation);
+      // Save in the current representation
+      const c = pickr.getColor()['to' + representation]().toString(prefs.precision);
+      await navigator.clipboard.writeText(c);
+      toast('copied');
+    }
+    catch (e) {
+      toast('Error: ' + e.message);
+      console.error(e);
+    }
   };
   pickr.on('change', color => {
     const hex = color.toHEXA().toString().slice(0, 7);
@@ -85,13 +99,21 @@ chrome.storage.local.get({
       }), 100);
     }
   }, true);
-  document.addEventListener('click', e => {
-    if (e.isTrusted && e.target.classList.contains('pcr-result')) {
-      e.target.select();
-      navigator.clipboard.writeText(e.target.value.toLowerCase()).then(() => toast('copied'));
+  document.addEventListener('click', async e => {
+    try {
+      if (e.isTrusted && e.target.classList.contains('pcr-result')) {
+        e.target.select();
+        await navigator.clipboard.writeText(e.target.value);
+        toast('copied');
+      }
+      else if (e.isTrusted && e.target.id === 'readable') {
+        await navigator.clipboard.writeText(e.target.value);
+        toast('copied');
+      }
     }
-    else if (e.isTrusted && e.target.id === 'readable') {
-      navigator.clipboard.writeText(e.target.value).then(() => toast('copied'));
+    catch (e) {
+      toast('Error: ' + e.message);
+      console.error(e);
     }
   });
 });

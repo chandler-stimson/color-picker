@@ -1,5 +1,5 @@
 {
   "description": {
-    "message": "Determinați culoarea pixelului de pe ecran cu ajutorul unei lupe cu pipetă. Suportă istoricul selecției culorilor și copierea în clipboard"
+    "message": "Determină culoarea unui pixel de pe ecran cu lupă și pipetă. Suportă istoricul selecției de culori și copierea în clipboard."
   }
 }

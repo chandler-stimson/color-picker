@@ -1,5 +1,5 @@
 {
   "description": {
-    "message": "Déterminez la couleur d'un pixel à l'écran à l'aide d'une pipette en forme de loupe. Il prend en charge l'historique de la sélection des couleurs et la copie du presse-papiers"
+    "message": "Détermine la couleur d’un pixel à l’écran avec une loupe et une pipette. Supporte l’historique de couleurs et la copie."
   }
 }

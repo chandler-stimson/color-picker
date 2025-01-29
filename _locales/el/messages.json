@@ -1,5 +1,5 @@
 {
   "description": {
-    "message": "Προσδιορίστε το χρώμα του εικονοστοιχείου στην οθόνη με ένα διαβήτη με μεγεθυντικό φακό. Υποστηρίζει ιστορικό επιλογής χρώματος και αντιγραφή πρόχειρου"
+    "message": "Determina el color de un píxel en pantalla con lupa y cuentagotas. Soporta historial de selección de color y copia al portapapeles."
   }
 }
