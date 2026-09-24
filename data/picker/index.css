@@ -4,12 +4,13 @@ html {
 body {
   margin: 0;
   display: grid;
-  grid-template-columns: min-content 180px;
-  overflow: hidden;
+  grid-template-columns: min-content 1fr;
+  width: 600px;
 }
 #inspect {
   display: grid;
   grid-template-rows: 1fr 40px;
+  white-space: nowrap;
 }
 #inspect > div {
   display: flex;
@@ -77,3 +78,7 @@ body {
 .pcr-app[data-theme='classic'] {
   padding-right: 0;
 }
+.pcr-app .pcr-interaction {
+  flex-wrap: nowrap;
+}
+
